@@ -1,4 +1,5 @@
 import json
+import time
 
 
 def valorFinalSoma():
@@ -13,15 +14,15 @@ def valorFinalSoma():
 
 def fibonnaci(input):
     seq_fib = [0, 1]
-    while seq_fib[-1] < input:
+    while seq_fib[-1] < input or len(seq_fib) < 3:
         prox = seq_fib[-1] + seq_fib[-2]
         seq_fib.append(prox)
-        if seq_fib[-1] == input:
+        if input in seq_fib:
             print(seq_fib)
-            print(f"{input} está na sequencia")
+            print(f"Resposta: {input} está na sequencia")
             return
-    print(seq_fib)
-    print(f"{input} não está na sequencia")
+    print(f"Sequencia Fibonacci: {seq_fib}")
+    print(f"Resposta: {input} não está na sequencia")
 
 def lerDadosJson(caminho):
     with open(caminho, 'r',encoding='utf-8') as arquivo:
@@ -44,7 +45,8 @@ def faturamentoDiario(caminho):
         if i['valor'] > media:
             dias_bons += 1
     
-    print(f"""Menor Valor: {menor_valor}
+    print(f"""Resposta: 
+Menor Valor: {menor_valor}
 Maior Valor: {maior_valor}
 Acima da média: {dias_bons} dias passaram de {media}
 """)
@@ -61,6 +63,7 @@ def tirarMedia(dados):
 def valorTotalMensal(faturamentos):
     Dados = faturamentos
     valor_total = 0
+    print("Resposta: ")
     for i in Dados:
         valor_total += i[1]
     for j in Dados:
@@ -73,7 +76,7 @@ def inverterString(string):
     for i in range(len(string)-1,-1,-1):
         string_invertida += string[i]
 
-    print(f"Invertido: {string_invertida}")
+    print(f"\nResposta: {string_invertida}")
 
 
 
@@ -83,10 +86,18 @@ Imprimir(SOMA);
 Ao final do processamento, qual será o valor da variável SOMA?\n""")
 valorFinalSoma()
 print("\n")
+input("Pressione Enter para próxima pergunta\n")
+
 
 print("""2) Dado a sequência de Fibonacci, onde se inicia por 0 e 1 e o próximo valor sempre será a soma dos 2 valores anteriores (exemplo: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34...), escreva um programa na linguagem que desejar onde, informado um número, ele calcule a sequência de Fibonacci e retorne uma mensagem avisando se o número informado pertence ou não a sequência.\n""")
-fibonnaci(int(input("Digite o numero: ")))
+
+digito = input("Digite o numero: ")
+while not digito.isdigit():
+    print("Digite um numero valido!")
+    digito = input("Digite o numero: ")
+fibonnaci(int(digito))
 print("\n")
+input("Pressione Enter para próxima pergunta\n")
 
 print("""3) Dado um vetor que guarda o valor de faturamento diário de uma distribuidora, faça um programa, na linguagem que desejar, que calcule e retorne:
 • O menor valor de faturamento ocorrido em um dia do mês;
@@ -94,6 +105,7 @@ print("""3) Dado um vetor que guarda o valor de faturamento diário de uma distr
 • Número de dias no mês em que o valor de faturamento diário foi superior à média mensal.\n""")
 faturamentoDiario('Dados/dados.json')
 print("\n")
+input("Pressione Enter para próxima pergunta\n")
 
 print("""4) Dado o valor de faturamento mensal de uma distribuidora, detalhado por estado:
 • SP – R$67.836,43
@@ -104,9 +116,13 @@ print("""4) Dado o valor de faturamento mensal de uma distribuidora, detalhado p
 
 Escreva um programa na linguagem que desejar onde calcule o percentual de representação que cada estado teve dentro do valor total mensal da distribuidora. \n""")
 valorTotalMensal([["SP",67836.43],["RJ",36678.66],["MG",29229.88],["ES",27165.48],["Outros",19849.53]])
+print("\n")
+input("Pressione Enter para próxima pergunta\n")
 
 print("""
 5) Escreva um programa que inverta os caracteres de um string.""")
-inverterString(input("Digite a string que será invertida: "))
+inverterString(input("Digite a string que será invertida: \n"))
 
+print("\nFim do programa!")
+input("Pressione Enter para sair...")
 
